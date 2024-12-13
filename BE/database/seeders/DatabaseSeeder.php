@@ -2,21 +2,28 @@
 
 namespace Database\Seeders;
 
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\{FileStorage, Laboratory, Category, Artifact, User, ArtifactCategory, Log};
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     */
-    public function run(): void
+    public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        // Esempi di esecuzione delle factory
+        echo("Category\n");
+        Category::factory(5)->create(); 
+        echo("Laboratory\n");
+        Laboratory::factory(10)->create(); 
+        echo("User\n");
+        User::factory(3)->create(); 
+        echo("Artifact\n");
+        Artifact::factory(2)->create(); 
+        echo("ArtifactCategory\n");
+        ArtifactCategory::factory(2)->create(); 
+        echo("Logs\n");
+        Log::factory(2)->create(); 
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        
     }
 }
+

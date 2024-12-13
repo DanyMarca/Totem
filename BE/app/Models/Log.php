@@ -4,21 +4,21 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class User extends Model
+class Log extends Model
 {
     use HasFactory;
 
-    protected $table = 'users';
+    protected $table = 'logs';
 
     protected $fillable = [
-        'username',
-        'password',
-        'role',
+        'user_id',
+        'action',
+        'details',
     ];
 
-    public function logs()
+    public function user()
     {
-        return $this->hasMany(Log::class, 'user_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
 }
 
