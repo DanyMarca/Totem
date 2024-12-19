@@ -13,13 +13,12 @@ return new class extends Migration
     {
         Schema::disableForeignKeyConstraints();
 
-        Schema::create('categories', function (Blueprint $table) {
+        Schema::create('laboratories_categories', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 255);
-            $table->text('caption_intro')->default('no description inserted');
-            $table->text('caption_specific')->default('no description inserted');
-            $table->string('color', 9);
-            $table->timestamps();
+            $table->unsignedBigInteger('laboratory_id');
+            $table->foreign('laboratory_id')->references('id')->on('laboratories');
+            $table->unsignedBigInteger('category_id');
+            $table->foreign('category_id')->references('id')->on('categories');
         });
 
         Schema::enableForeignKeyConstraints();
@@ -30,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('categories');
+        Schema::dropIfExists('laboratories_categories');
     }
 };
