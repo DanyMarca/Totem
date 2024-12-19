@@ -16,9 +16,9 @@ return new class extends Migration
         Schema::create('artifact_categories', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('category_id');
-            $table->foreign('category_id')->references('id')->on('categories');
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('CASCADE');;
             $table->unsignedBigInteger('artifact_id');
-            $table->foreign('artifact_id')->references('id')->on('artifacts');
+            $table->foreign('artifact_id')->references('id')->on('artifacts')->onDelete('CASCADE');;
             $table->timestamps();
         });
 

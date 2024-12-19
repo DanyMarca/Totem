@@ -23,17 +23,17 @@ class Artifact extends Model
 
     public function categories()
     {
-        return $this->belongsToMany(Category::class, 'artifact_categories', 'artifact_id', 'category_id');
+        return $this->belongsToMany(Category::class, 'artifacts_categories');
     }
 
-    public function createdBy()
+    public function users()
     {
-        return $this->belongsTo(User::class, 'created_by');
+        return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function photos()
+    public function filestorageable()
     {
-        return $this->morphMany(FileStorage::class, 'photosAble');
+        return $this->morphMany(FileStorage::class, 'filestorageable');
     }
 }
 

@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('material', 255)->nullable();
             $table->string('location', 255)->nullable();
             $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('CASCADE');;
             $table->enum('type', ["event","object"]);
             $table->smallInteger('priority')->nullable();
             $table->timestamps();

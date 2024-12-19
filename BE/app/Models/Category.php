@@ -10,10 +10,7 @@ class Category extends Model
 
     protected $table = 'categories';
 
-    protected $fillable = [
-        'name',
-        'description',
-    ];
+    protected $fillable = ['name', 'caption_intro', 'caption_specific', 'color'];
 
     public function artifacts()
     {
@@ -23,5 +20,15 @@ class Category extends Model
     public function laboratories()
     {
         return $this->hasMany(Laboratory::class, 'category_id');
+    }
+
+    public function filestorageable()
+    {
+        return $this->morphMany(FileStorage::class, 'filestorageable');
+    }
+
+    public function subjects()
+    {
+        return $this->hasMany(Subject::class);
     }
 }

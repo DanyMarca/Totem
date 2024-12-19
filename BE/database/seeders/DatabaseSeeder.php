@@ -3,26 +3,31 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\{FileStorage, Laboratory, Category, Artifact, User, ArtifactCategory, Log};
+use App\Models\{FileStorage, Laboratory, Category, Artifact, User, ArtifactCategory, LaboratoryCategory, Log, Subject};
 
 class DatabaseSeeder extends Seeder
 {
     public function run()
     {
         // Esempi di esecuzione delle factory
-        echo("Category\n");
+        echo("1° User\n");
+        User::factory(3)->create();
+        echo("2° Logs\n");
+        Log::factory(10)->create(); 
+        echo("3° Category\n");
         Category::factory(5)->create(); 
-        echo("Laboratory\n");
+        echo("4° Laboratory\n");
         Laboratory::factory(10)->create(); 
-        echo("User\n");
-        User::factory(3)->create(); 
-        echo("Artifact\n");
-        Artifact::factory(2)->create(); 
-        echo("ArtifactCategory\n");
-        ArtifactCategory::factory(2)->create(); 
-        echo("Logs\n");
-        Log::factory(2)->create(); 
-
+        echo("5° Artifact\n");
+        Artifact::factory(10)->create(); 
+        echo("6° ArtifactCategory\n");
+        ArtifactCategory::factory(10)->create(); 
+        echo("7° LaboratoryCategory\n");
+        LaboratoryCategory::factory(10)->create();
+        echo("8° Filestorage\n");
+        FileStorage::factory(10)->create();  
+        echo("9° Subject\n");
+        Subject::factory(10)->create();  
         
     }
 }

@@ -16,6 +16,15 @@ class User extends Model
         'role',
     ];
 
+    protected $hiden = [
+        'password'
+    ];
+
+    public function artifacts()
+    {
+        return $this->hasMany(Artifact::class);
+    }
+    
     public function logs()
     {
         return $this->hasMany(Log::class, 'user_id');

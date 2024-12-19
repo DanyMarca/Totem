@@ -2,7 +2,10 @@
 
 namespace Database\Factories;
 
+use App\Models\Artifact;
+use App\Models\Category;
 use App\Models\FileStorage;
+use App\Models\Laboratory;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -14,12 +17,12 @@ class FileStorageFactory extends Factory
 
     public function definition()
     {
+        $obj = $this->faker->randomElement([Category::class,Artifact::class,Laboratory::class]);
         return [
             'file_url' => $this->faker->imageUrl(),
-            'caption' => $this->faker->sentence(),
-            'created_at' => $this->faker->dateTime(),
-            'photos_able_id' => null,
-            'photos_able_type' => null,
+            'orientation' => $this->faker->randomElement(['landscape', 'portrait']),
+            'filestorageable_id' => $obj::inRandomOrder()->first()->id,
+            'filestorageable_type' => $obj
         ];
     }
 }

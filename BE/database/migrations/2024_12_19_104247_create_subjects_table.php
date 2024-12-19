@@ -16,13 +16,14 @@ return new class extends Migration
         Schema::create('subjects', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('category_id');
-            $table->foreign('category_id')->references('id')->on('categories');
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('CASCADE');
             $table->string('name', 60);
             $table->integer('1_year')->nullable();
             $table->integer('2_year')->nullable();
             $table->integer('3_year')->nullable();
             $table->integer('4_year')->nullable();
             $table->integer('5_year')->nullable();
+            $table->timestamps();
         });
 
         Schema::enableForeignKeyConstraints();

@@ -17,8 +17,13 @@ class Laboratory extends Model
         'description',
     ];
 
-    public function category()
+    public function categories()
     {
-        return $this->belongsTo(Category::class, 'category_id');
+        return $this->belongsToMany(Category::class, 'laboratories_categories');
+    }
+
+    public function filestorageable()
+    {
+        return $this->morphMany(FileStorage::class, 'filestorageable');
     }
 }

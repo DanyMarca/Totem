@@ -16,9 +16,10 @@ return new class extends Migration
         Schema::create('laboratories_categories', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('laboratory_id');
-            $table->foreign('laboratory_id')->references('id')->on('laboratories');
+            $table->foreign('laboratory_id')->references('id')->on('laboratories')->onDelete('CASCADE');;
             $table->unsignedBigInteger('category_id');
-            $table->foreign('category_id')->references('id')->on('categories');
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('CASCADE');;
+            $table->timestamps();
         });
 
         Schema::enableForeignKeyConstraints();

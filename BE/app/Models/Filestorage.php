@@ -14,11 +14,11 @@ class FileStorage extends Model
         'file_url',
         'caption',
         'created_at',
-        'photos_able_id',
-        'photos_able_type',
+        'filestorageable_id',
+        'filestorageable_type',
     ];
 
-    public function photosAble()
+    public function filestorageable()
     {
         return $this->morphTo();
     }
