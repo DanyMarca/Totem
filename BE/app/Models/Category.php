@@ -14,10 +14,8 @@ class Category extends Model
 
     public function artifacts()
     {
-        return $this->hasMany(Artifact::class);
+        return $this->belongsToMany(Artifact::class, 'artifact_categories');
     }
-
-
 
     public function laboratories()
     {

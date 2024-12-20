@@ -50,11 +50,11 @@ class RelationTestController extends Controller
             }
 
             // Test Polymorphic Relations (Artifact -> Files)
-            $artifact = Artifact::with('files')->first();
-            if ($artifact && $artifact->files) {
-                $results['Artifact -> Files'] = 'OK';
+            $artifact = Artifact::with('filestorageable')->first();
+            if ($artifact && $artifact->filestorageable) {
+                $results['Artifact -> filestorageable'] = 'OK';
             } else {
-                $results['Artifact -> Files'] = 'FAILED';
+                $results['Artifact -> filestorageable'] = 'FAILED';
             }
 
             // Test Laboratory -> Categories (belongsToMany)

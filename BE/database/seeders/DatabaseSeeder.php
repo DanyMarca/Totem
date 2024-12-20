@@ -11,11 +11,11 @@ class DatabaseSeeder extends Seeder
     {
         // Esempi di esecuzione delle factory
         echo("1° User\n");
-        User::factory(3)->create();
+        User::factory(1)->create();
         echo("2° Logs\n");
         Log::factory(10)->create(); 
         echo("3° Category\n");
-        Category::factory(5)->create(); 
+        Category::factory(1)->create(); 
         echo("4° Laboratory\n");
         Laboratory::factory(10)->create(); 
         echo("5° Artifact\n");
