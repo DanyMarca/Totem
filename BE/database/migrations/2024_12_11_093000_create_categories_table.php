@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
             $table->string('name', 255);
+            $table->enum('type',['tecnico','liceo']);
             $table->text('caption_intro')->default('no description inserted');
             $table->text('caption_specific')->default('no description inserted');
             $table->string('color', 9);

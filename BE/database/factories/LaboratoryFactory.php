@@ -16,7 +16,6 @@ class LaboratoryFactory extends Factory
     public function definition()
     {
         return [
-            'category_id' => Category::inRandomOrder()->first()->id,
             'name' => $this->faker->company(),
             'description' => $this->faker->paragraph(),
         ];

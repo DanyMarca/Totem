@@ -23,8 +23,10 @@ class Artifact extends Model
 
     public function categories()
     {
-        return $this->belongsToMany(Category::class, 'artifacts_categories');
+        return $this->belongsTo(Category::class);
     }
+
+    
 
     public function users()
     {
