@@ -19,4 +19,19 @@ use App\Http\Controllers\RelationTestController;
 //     return $request->user();
 // });
 
-Route::get('/test-relations', [RelationTestController::class, 'checkRelations']);
+Route::get('/test-relations', [RelationTestController::class, 'checkRelations']); //test per le relazioni
+
+Route::group([ //standard toutes jwt
+
+    'middleware' => 'api',
+    'namespace' => 'App\Http\Controllers',
+    'prefix' => 'auth'
+
+], function ($router) {
+
+    Route::post('login', 'AuthController@login');
+    Route::post('logout', 'AuthController@logout');
+    Route::post('refresh', 'AuthController@refresh');
+    Route::post('me', 'AuthController@me');
+
+});

@@ -4,12 +4,19 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\{FileStorage, Laboratory, Category, Artifact, User, ArtifactCategory, LaboratoryCategory, Log, Subject};
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
     public function run()
     {
-        // Esempi di esecuzione delle factory
+        DB::table('users')->insert([
+            'username' => 'Admin',
+            'email' => 'admin'.'@example.com',
+            'password' => Hash::make('password'),
+        ]);
+        
         echo("1° User\n");
         User::factory(1)->create();
         echo("2° Logs\n");
