@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FilestorageController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RelationTestController;
@@ -19,9 +20,11 @@ use App\Http\Controllers\RelationTestController;
 //     return $request->user();
 // });
 
+//tests -------------------------------------------------------
 Route::get('/test-relations', [RelationTestController::class, 'checkRelations']); //test per le relazioni
+Route::post('/upload', [FilestorageController::class, 'storeFile']);
 
-Route::group([ //standard toutes jwt
+Route::group([ //standard toutes jwt -------------------------------------------------------
 
     'middleware' => 'api',
     'namespace' => 'App\Http\Controllers',
