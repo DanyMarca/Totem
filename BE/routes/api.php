@@ -23,8 +23,10 @@ use App\Http\Controllers\RelationTestController;
 //tests -------------------------------------------------------
 Route::get('/test-relations', [RelationTestController::class, 'checkRelations']); //test per le relazioni
 Route::post('/upload', [FilestorageController::class, 'storeFile']);
+Route::get('/show_path/{id}', [FilestorageController::class, 'show_path']);
 
-Route::group([ //standard toutes jwt -------------------------------------------------------
+//standard toutes jwt -------------------------------------------------------
+Route::group([
 
     'middleware' => 'api',
     'namespace' => 'App\Http\Controllers',

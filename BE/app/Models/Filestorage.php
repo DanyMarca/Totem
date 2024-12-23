@@ -11,7 +11,7 @@ class FileStorage extends Model
     protected $table = 'filestorages';
 
     protected $fillable = [
-        'file_url',
+        'path',
         'caption',
         'created_at',
         'filestorageable_id',

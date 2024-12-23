@@ -19,7 +19,7 @@ class FileStorageFactory extends Factory
     {
         $obj = $this->faker->randomElement([Category::class,Artifact::class,Laboratory::class]);
         return [
-            'file_url' => $this->faker->imageUrl(),
+            'path' => $this->faker->imageUrl(),
             'orientation' => $this->faker->randomElement(['landscape', 'portrait']),
             'filestorageable_id' => $obj::inRandomOrder()->first()->id,
             'filestorageable_type' => $obj
