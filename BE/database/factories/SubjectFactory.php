@@ -10,7 +10,7 @@ class SubjectFactory extends Factory
     public function definition()
     {
         return [
-            'category_id' => \App\Models\Category::factory(), // Relazione con Category
+            'category_id' => \App\Models\Category::inRandomOrder()->first()->id, // Relazione con Category
             'name' => $this->faker->word(),
             '1_year' => $this->faker->randomDigitNotNull(),
             '2_year' => $this->faker->randomDigitNotNull(),

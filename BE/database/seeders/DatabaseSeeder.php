@@ -2,10 +2,12 @@
 
 namespace Database\Seeders;
 
+
 use Illuminate\Database\Seeder;
-use App\Models\{FileStorage, Laboratory, Category, Artifact, User, ArtifactCategory, LaboratoryCategory, Log, Subject};
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use App\Models\{FileStorage, Laboratory, Category, Artifact, User, ArtifactCategory, LaboratoryCategory, Log, Subject};
+use Database\Seeders\FilestorageSeeder as SeedersFilestorageSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -22,7 +24,7 @@ class DatabaseSeeder extends Seeder
         echo("2° Logs\n");
         Log::factory(10)->create(); 
         echo("3° Category\n");
-        Category::factory(1)->create(); 
+        Category::factory(10)->create(); 
         echo("4° Laboratory\n");
         Laboratory::factory(10)->create(); 
         echo("5° Artifact\n");
@@ -32,6 +34,7 @@ class DatabaseSeeder extends Seeder
         echo("7° LaboratoryCategory\n");
         LaboratoryCategory::factory(10)->create();
         echo("8° Filestorage\n");
+        $this->call(FilestorageSeeder::class);
         FileStorage::factory(10)->create();  
         echo("9° Subject\n");
         Subject::factory(10)->create();  

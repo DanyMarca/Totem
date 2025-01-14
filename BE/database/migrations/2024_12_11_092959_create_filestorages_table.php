@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('filestorages', function (Blueprint $table) {
             $table->id();
             $table->string('path', 255)->nullable();
-            $table->string('orientation', 12)->nullable();
+            $table->string('orientation', 255)->nullable();
             $table->morphs('filestorageable');
             $table->timestamps();
         });

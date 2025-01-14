@@ -32,9 +32,9 @@ class Artifact extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function filestorageable()
+    public function Filestorage()
     {
-        return $this->morphMany(FileStorage::class, 'filestorageable');
+        return $this->morphMany(FileStorage::class, 'Filestorage');
     }
 }
 

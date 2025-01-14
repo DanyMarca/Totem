@@ -25,7 +25,7 @@ Route::get('/test-relations', [RelationTestController::class, 'checkRelations'])
 Route::post('/upload', [FilestorageController::class, 'storeFile']);
 Route::get('/show_path/{id}', [FilestorageController::class, 'show_path']);
 
-//standard toutes jwt -------------------------------------------------------
+//standard routes jwt -------------------------------------------------------
 Route::group([
 
     'middleware' => 'api',
@@ -39,4 +39,14 @@ Route::group([
     Route::post('refresh', 'AuthController@refresh');
     Route::post('me', 'AuthController@me');
 
+});
+
+//Category routes -------------------------------------------------------
+Route::group([
+    'namespace' => 'App\Http\Controllers',
+    'prefix' => 'Category'
+
+], function ($router) {
+
+    Route::get('home', 'CategoryController@index');
 });
