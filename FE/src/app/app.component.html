@@ -1,0 +1,61 @@
+<div class="container">
+  <h1>Traduttore con LibreTranslate</h1>
+
+  <!-- Input per il testo da tradurre -->
+  <div class="form-group">
+    <label for="textToTranslate">Testo da tradurre:</label>
+    <textarea 
+      id="textToTranslate" 
+      [(ngModel)]="textToTranslate" 
+      placeholder="Inserisci il testo qui..." 
+      rows="4" 
+      class="form-control">
+    </textarea>
+  </div>
+
+  <!-- Selezione della lingua di origine -->
+  <div class="form-group">
+    <label for="sourceLang">Lingua di origine:</label>
+    <select 
+      id="sourceLang" 
+      [(ngModel)]="sourceLang" 
+      class="form-control">
+      <option value="en">Inglese</option>
+      <option value="it">Italiano</option>
+      <option value="es">Spagnolo</option>
+      <option value="fr">Francese</option>
+      <option value="de">Tedesco</option>
+      <!-- Altre lingue supportate -->
+    </select>
+  </div>
+
+  <!-- Selezione della lingua di destinazione -->
+  <div class="form-group">
+    <label for="targetLang">Lingua di destinazione:</label>
+    <select 
+      id="targetLang" 
+      [(ngModel)]="targetLang" 
+      class="form-control">
+      <option value="it">Italiano</option>
+      <option value="en">Inglese</option>
+      <option value="es">Spagnolo</option>
+      <option value="fr">Francese</option>
+      <option value="de">Tedesco</option>
+      <!-- Altre lingue supportate -->
+    </select>
+  </div>
+
+  <!-- Pulsante per avviare la traduzione -->
+  <button (click)="translate()" class="btn btn-primary mt-3">Traduci</button>
+
+  <!-- Sezione per il risultato -->
+  <div class="result mt-4">
+    <h2>Risultato:</h2>
+    <p *ngIf="translatedText$ | async as translatedText" class="alert alert-success">
+      {{ translatedText }}
+    </p>
+    <p *ngIf="!(translatedText$ | async)" class="alert alert-secondary">
+      Nessun risultato ancora.
+    </p>
+  </div>
+</div>
