@@ -4,14 +4,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class FileStorage extends Model
+class Filestorage extends Model
 {
     use HasFactory;
 
     protected $table = 'filestorages';
 
     protected $fillable = [
-        'file_url',
+        'path',
         'caption',
         'created_at',
         'filestorageable_id',

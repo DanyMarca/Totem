@@ -17,8 +17,8 @@ class ArtifactCategoryFactory extends Factory
     public function definition()
     {
         return [
-            'category_id' => Category::factory(),
-            'artifact_id' => Artifact::factory(),
+            'category_id' => Category::inRandomOrder()->first()->id,
+            'artifact_id' => Artifact::inRandomOrder()->first()->id,
         ];
     }
 }
