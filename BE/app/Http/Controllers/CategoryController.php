@@ -5,27 +5,36 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use PhpParser\Builder\Class_;
 
 class CategoryController extends Controller
 {
+    public function findImage($category){
+        $image = $category->filestorageable()->select('path','orientation')->get();
+        $category->image = $image->isNotEmpty() ? $image : null;
+    }
     public function index(){
         $categories = Category::all();
         $lyceum = [];
         $technician = [];
+        $lyceumCarosello = [];
+        $technicianCarosello = [];
+
         foreach ($categories as $category) {
-            if($category->type == 'liceo'){
-                $image = $category->filestorageable()->select('path','orientation')->first();
-                $imagePath   = $image ? $image->path : null;
-                $category->image = $imagePath;
-                $category->orientation = $image ? $image->orientation : null;
+            $this->findImage($category);
+
+            // Aggiungi la prima immagine al carosello specifico per tipo se disponibile
+            if ($category->image && $category->image->isNotEmpty()) {
+                if ($category->type == 'liceo') {
+                    $lyceumCarosello[] = $category->image->first()->path;
+                } elseif ($category->type == 'tecnico') {
+                    $technicianCarosello[] = $category->image->first()->path;
+                }
+            }
+
+            if ($category->type == 'liceo') {
                 $lyceum[] = $category;
-
-
-            }if($category->type == 'tecnico'){
-                $image = $category->filestorageable()->select('path','orientation')->first();
-                $imagePath   = $image ? $image->path : null;
-                $category->image = $imagePath;
-                $category->orientation = $image ? $image->orientation : null;
+            } elseif ($category->type == 'tecnico') {
                 $technician[] = $category;
             }
         }
@@ -33,51 +42,16 @@ class CategoryController extends Controller
             'status' => 'success',
             'Lyceum' => [
                 "name" => "Liceo",
+                'carosello' => $lyceumCarosello,
                 "Categories" => $lyceum,
+                
             ],
             'technician' => [
                 "name" => "Tecnico",
+                'carosello' => $technicianCarosello,
                 "Categories" => $technician,
+                
             ],
         ], 200);
     }
 }
-
-
-
-// {
-// 	status: "sucsess",
-// 	Lyceum :{
-// 		name:$name,
-// 		image:$path,
-// 		Categories:[
-// 			{
-// 			id:$id,
-// 			type:$type,
-// 			name:$name,
-// 			image:$path,
-// 			color:$hash,
-// 			description: $description_intro,
-// 			description_image: $path,
-// 			},
-// 			{}
-// 		]
-// 	}
-// 	technician:
-// 		{
-// 		name:$name,
-// 		image:$path,
-// 		Categories:[
-// 			{
-// 			id:$id,
-// 			type:$type,
-// 			name:$name,
-// 			image:$path,
-// 			color:$hash,
-// 			description: $description_intro,
-// 			description_image: $path,
-// 			},
-// 			{}
-// 		]
-// 	}
-// }
