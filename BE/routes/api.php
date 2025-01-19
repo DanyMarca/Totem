@@ -49,4 +49,5 @@ Route::group([
 ], function ($router) {
 
     Route::get('home', 'CategoryController@index');
+    Route::get('{id}', 'CategoryController@show');
 });
