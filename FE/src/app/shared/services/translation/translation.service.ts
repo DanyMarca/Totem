@@ -9,7 +9,7 @@ export class TranslationService {
 
   constructor(private http: HttpClient) {}
 
-  translateText(text: string) {
+  translateText(text: string, selectedLanguage: string) {
     return this.http.get(`${this.apiUrl}it/en/${encodeURIComponent(text)}`);
 }
 
