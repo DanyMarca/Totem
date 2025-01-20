@@ -11,7 +11,7 @@ class SubjectFactory extends Factory
     {
         return [
             'category_id' => \App\Models\Category::inRandomOrder()->first()->id, // Relazione con Category
-            'name' => $this->faker->word(),
+            'name' => $this->faker->randomElement(['Matematica', 'Fisica', 'Informatica', 'Italiano', 'Storia', 'Filosofia', 'Scienze', 'Inglese']),
             '1_year' => $this->faker->randomDigitNotNull(),
             '2_year' => $this->faker->randomDigitNotNull(),
             '3_year' => $this->faker->randomDigitNotNull(),

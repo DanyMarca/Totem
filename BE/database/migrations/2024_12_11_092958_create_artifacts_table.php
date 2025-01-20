@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('artifacts', function (Blueprint $table) {
             $table->id();
             $table->string('name', 255);
-            $table->string('description')->nullable();
+            $table->longText('description')->nullable();
             $table->string('period', 100)->nullable();
             $table->string('material', 255)->nullable();
             $table->string('location', 255)->nullable();
