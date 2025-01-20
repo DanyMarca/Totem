@@ -1,0 +1,17 @@
+<header>
+    <div id="header-content">
+        <img src="Totem\FE\src\assets\logos\positivo.png" alt="" srcset="">
+        <div id="menu">
+            <ul>
+                <li>{{ 'header.ADDRESSES' | translate }}</li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </div>
+        <select [ngModel]="selectedLanguage" (change)="updateSelectedOption($event)">
+            <option value="it" selected>Italiano</option>
+            <option value="en">English</option>
+        </select>
+    </div>
+</header>
