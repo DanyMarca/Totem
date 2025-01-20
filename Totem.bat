@@ -1,4 +1,7 @@
 @echo off
+REM Ottieni la directory dello script
+set scriptdir=%~dp0
+
 echo Avvio del servizio MySQL...
 start /b "MySQL" "C:\xampp\mysql\bin\mysqld"
 if %errorlevel% neq 0 (
@@ -8,7 +11,7 @@ if %errorlevel% neq 0 (
 )
 
 echo Avvio del server Laravel...
-cd C:\Users\pc\Desktop\lavoro\Totem\BE
+cd "%scriptdir%BE"
 start /b "Laravel" cmd /c "php artisan serve"
 if %errorlevel% neq 0 (
     echo Errore nell'avvio del server Laravel.
@@ -17,7 +20,7 @@ if %errorlevel% neq 0 (
 )
 
 echo Avvio del server Angular...
-cd C:\Users\pc\Desktop\lavoro\Totem\FE
+cd "%scriptdir%FE"
 start /b "Angular" cmd /c "ng serve"
 if %errorlevel% neq 0 (
     echo Errore nell'avvio del server Angular.
