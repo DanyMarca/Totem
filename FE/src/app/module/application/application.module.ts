@@ -11,13 +11,14 @@ import { CardComponent } from './component/card/card.component';
 import { HeaderComponent } from './component/header/header.component';
 import { ApplicationComponent } from './application.component';
 import { FormsModule } from '@angular/forms';
+import { AmbienteComponent } from './pages/ambiente/ambiente.component';
 
 @NgModule({
   declarations: [
     ApplicationComponent,   // Componente principale del modulo
     IndirizziComponent,     // Pagina "Indirizzi"
     CardComponent,          // Componente "Card"
-    HeaderComponent         // Componente "Header"
+    HeaderComponent, AmbienteComponent         // Componente "Header"
   ],
   imports: [
     CommonModule,           // Moduli base Angular

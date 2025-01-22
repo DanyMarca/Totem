@@ -1,1 +1,44 @@
 /* You can add global styles to this file, and also import other style files */
+
+:root {
+    /* Colori */
+    --background-primary: #17324D;
+    --background-secondary: #BDC8D3;
+    --background-third: #EEF0F1;
+
+    --secondary-text-color: #fff;
+
+    --secondary-color: #6c757d;
+    --background-color: #f8f9fa;
+
+    /* Tipografia */
+    --font-menu-size: 44px;
+    --font-menu-family-sans: 'Roboto', Arial, sans-serif;
+
+    /* Spaziature */
+    --spacing-small: 8px;
+    --spacing-large: 24px;
+
+    /* Layout */
+    --container-width: 1200px;
+
+    /* Effetti */
+    --border-radius: 8px;
+    --transition-duration: 0.3s;
+}
+
+
+
+
+/* ! Reset */
+body, html{ font-family: 'Intro', Arial, Helvetica, sans-serif; font-size: 16px; box-sizing: border-box;margin: 0;padding: 0;}*,*:before,*:after{ box-sizing: border-box; }h1,h2,h3,h4,h5,h6, p, ol, ul{margin: 0px !important;padding: 0 !important;}ol,ul{list-style-type: none;}img{height: auto;}h1{font-size: 4rem;} h2{font-size: 3rem;} h3{font-size: 2rem;} h4{font-size: 1rem;} h5{font-size: 0.8rem;} h6{font-size: 0.6rem;}a{text-decoration:none}
+
+
+.logo {
+    background: url(assets/logos/positivo.png) no-repeat center center;
+    background-size: contain; /* Adatta l'immagine di sfondo per contenere l'intero elemento */
+    width: 70px;
+    height: 70px;
+    margin: 0 auto;
+    display: block;
+}
