@@ -41,7 +41,8 @@ class CategoryController extends Controller
         }
         return response()->json([
             'status' => 'success',
-            'Lyceum' => [
+            'cards'=> [
+                'Lyceum' => [
                 "name" => "Liceo",
                 'carosello' => $lyceumCarosello,
                 "Categories" => $lyceum,
@@ -53,6 +54,8 @@ class CategoryController extends Controller
                 "Categories" => $technician,
 
             ],
+            ]
+            
         ], 200);
     }
 

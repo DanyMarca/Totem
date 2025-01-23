@@ -1,7 +1,18 @@
-<Section id="indirizzi">
-    
-    <div id="home-content">
-
+<section id="hero">
+    <div id="hero-content">
+      <div class="card" style="width: 18rem;" *ngFor="let key of cardKeys">
+        <div class="card-body">
+          <h5 class="card-title">{{ key }}</h5>
+        </div>
+      </div>
     </div>
+</section>
 
-</Section>
+
+<div *ngIf="isLoading" class="loader">
+    Caricamento in corso...
+</div>
+
+<div *ngIf="!isLoading">
+<!-- Qui mostra i dati caricati -->
+</div>

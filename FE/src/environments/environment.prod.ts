@@ -1,5 +1,5 @@
 export const environment = {
     production: true,
-    apiBaseUrl: 'https://api.example.com',
+    apiBaseUrl: 'http://127.0.0.1:8000/api/Category/',
     
   };

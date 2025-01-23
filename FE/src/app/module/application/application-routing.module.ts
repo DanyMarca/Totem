@@ -8,7 +8,9 @@ const routes: Routes = [
   {
     path: '', component: ApplicationComponent, children: [
       { path: 'indirizzi', component: IndirizziComponent },
-      { path: 'ambiente', component: AmbienteComponent }     
+      { path: 'ambiente', component: AmbienteComponent },
+      { path: '', redirectTo: 'indirizzi', pathMatch: 'full'}
+
     ]
   }
 ];
