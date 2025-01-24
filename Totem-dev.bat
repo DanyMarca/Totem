@@ -3,6 +3,7 @@ REM Ottieni la directory dello script
 set scriptdir=%~dp0
 
 echo Avvio del servizio MySQL...
+
 start /b "MySQL" "C:\xampp\mysql\bin\mysqld"
 if %errorlevel% neq 0 (
     echo Errore nell'avvio del servizio MySQL. Controllare il percorso.
@@ -35,8 +36,8 @@ if errorlevel 1 (
     goto check_angular
 )
 
-REM Chiudi tutte le istanze di Chrome
-taskkill /f /im chrome.exe >nul 2>&1
+@REM REM Chiudi tutte le istanze di Chrome
+@REM taskkill /f /im chrome.exe >nul 2>&1
 
 REM Avvia Chrome in modalità kiosk
 echo Apertura del browser in modalità kiosk...
