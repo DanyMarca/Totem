@@ -3,6 +3,7 @@ REM Ottieni la directory dello script
 set scriptdir=%~dp0
 
 echo Avvio del servizio MySQL...
+
 start /b "MySQL" "C:\xampp\mysql\bin\mysqld"
 if %errorlevel% neq 0 (
     echo Errore nell'avvio del servizio MySQL. Controllare il percorso.
@@ -19,7 +20,7 @@ if %errorlevel% neq 0 (
 
 echo Avvio del server Angular...
 cd "%scriptdir%FE"
-start /b "Angular" cmd /c "ng serve"
+start /b "Angular" cmd /c "ng serve --host=0.0.0.0 --disable-host-check"
 if %errorlevel% neq 0 (
     echo Errore nell'avvio del server Angular.
     exit /b
@@ -41,6 +42,7 @@ taskkill /f /im chrome.exe >nul 2>&1
 REM Avvia Chrome in modalità kiosk
 echo Apertura del browser in modalità kiosk...
 start chrome --kiosk "http://localhost:4200/"
+
 
 
 if %errorlevel% neq 0 (
