@@ -1,18 +1,25 @@
-<section id="hero">
+<section id="hero" *ngIf="showHero">
     <div id="hero-content">
-      <div class="card" style="width: 18rem;" *ngFor="let key of cardKeys">
+
+      <div class="card" style="width: 552px" *ngFor="let obj of homedata.cards; let j = index" (click)="genereteCategoryDetails(obj)">
+
+        <div class="img-container">
+          <img [src]="obj.carosello[j]" class="" alt="...">
+        </div>
+
         <div class="card-body">
-          <h5 class="card-title">{{ key }}</h5>
+          <h5 class="card-title">{{obj.name}}</h5>
         </div>
       </div>
     </div>
 </section>
 
+<section id="category-details" *ngIf="showCategory">
+  <div id="category-container">
+    <!-- creare e istanziare in modo iterativo (categoryDetails.Categories) il componente card -->
+  </div>
+</section>
 
-<div *ngIf="isLoading" class="loader">
-    Caricamento in corso...
-</div>
-
-<div *ngIf="!isLoading">
-<!-- Qui mostra i dati caricati -->
-</div>
+<section *ngIf="isLoading" class="loader-container">
+  <div class="loader"></div>
+</section>

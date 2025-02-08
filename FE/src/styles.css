@@ -42,3 +42,8 @@ body, html{ font-family: 'Intro', Arial, Helvetica, sans-serif; font-size: 16px;
     margin: 0 auto;
     display: block;
 }
+
+section{
+    height: 80vh;
+    width: 100%;
+}

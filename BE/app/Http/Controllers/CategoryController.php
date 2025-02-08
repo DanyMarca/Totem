@@ -42,13 +42,13 @@ class CategoryController extends Controller
         return response()->json([
             'status' => 'success',
             'cards'=> [
-                'Lyceum' => [
+                [
                 "name" => "Liceo",
                 'carosello' => $lyceumCarosello,
                 "Categories" => $lyceum,
 
             ],
-            'technician' => [
+            [
                 "name" => "Tecnico",
                 'carosello' => $technicianCarosello,
                 "Categories" => $technician,

@@ -1,4 +1,4 @@
-import { Component,OnInit } from '@angular/core';
+import { Component,OnInit  } from '@angular/core';
 import { catchError, of, tap } from 'rxjs';
 import { ContentServiceService } from 'src/app/shared/services/content-service.service';
 
@@ -12,7 +12,9 @@ export class IndirizziComponent {
 
   homedata:any=[];
   isLoading: boolean = false;
-  cardKeys: { [key: string]: boolean } = {}
+  showHero: boolean = false;
+  showCategory: boolean = false;
+  categoryDetails: any = [];
 
 
   constructor(private contentService: ContentServiceService) { }
@@ -25,7 +27,10 @@ export class IndirizziComponent {
     this.isLoading = true; 
     
     this.contentService?.fetchDataHomeIndirizzi()?.pipe(
-      tap(() => this.isLoading = false), // Nascondi il loader quando i dati vengono ricevuti
+      tap(() => {
+        this.isLoading = false;
+        this.showHero = true;
+      }), // Nascondi il loader quando i dati vengono ricevuti e mostra la hero section
       catchError((error) => {
         this.isLoading = false; // Nascondi il loader in caso di errore
         console.error("Errore durante il caricamento dei dati:", error);
@@ -33,16 +38,17 @@ export class IndirizziComponent {
       })
     ).subscribe((res) => {
       this.homedata=res
-      this.dataProcessor()
+      
     });
+  }
+
+  genereteCategoryDetails(category: any): void {
+    this.categoryDetails = category;
+    this.showHero = false;
+    console.log(this.categoryDetails);
+    this.showCategory = true;
+
+
   }
   
-  dataProcessor(){
-    this.homedata.forEach((element: { id: string | number; }) => {
-      this.cardKeys[element.id]=false
-    });
-  }
-
 }
-
-

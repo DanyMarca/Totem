@@ -29,7 +29,7 @@ if %errorlevel% neq 0 (
 )
 
 echo Apertura del browser su Google...
-start chrome --start-fullscreen "http://localhost:4200/"
+start chrome --start-kiosk "http://localhost:4200/"
 if %errorlevel% neq 0 (
     echo Errore nell'apertura del browser.
     pause
