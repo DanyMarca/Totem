@@ -12,7 +12,7 @@ if %errorlevel% neq 0 (
 
 echo Avvio del server Laravel...
 cd "%scriptdir%BE"
-start /b "Laravel" cmd /c "php artisan serve"
+start /b "Laravel" cmd /c "php artisan serve --host=0.0.0.0 --port=8000"
 if %errorlevel% neq 0 (
     echo Errore nell'avvio del server Laravel.
     exit /b
@@ -26,10 +26,6 @@ if %errorlevel% neq 0 (
     exit /b
 )
 
-<<<<<<< HEAD
-echo Apertura del browser su Google...
-start chrome --start-kiosk "http://localhost:4200/"
-=======
 REM Controlla se il server Angular è pronto
 echo Controllo del server Angular in corso...
 :check_angular
@@ -49,7 +45,6 @@ start chrome --kiosk "http://localhost:4200/"
 
 
 
->>>>>>> BE-general-fixess
 if %errorlevel% neq 0 (
     echo Errore nell'apertura del browser.
     exit /b

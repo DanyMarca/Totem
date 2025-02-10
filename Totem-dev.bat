@@ -12,7 +12,7 @@ if %errorlevel% neq 0 (
 
 echo Avvio del server Laravel...
 cd "%scriptdir%BE"
-start /b "Laravel" cmd /c "php artisan serve"
+start /b "Laravel" cmd /c "php artisan serve --host=0.0.0.0 --port=8000"
 if %errorlevel% neq 0 (
     echo Errore nell'avvio del server Laravel.
     exit /b
