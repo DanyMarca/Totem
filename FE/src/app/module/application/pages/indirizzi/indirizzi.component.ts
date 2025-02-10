@@ -45,7 +45,7 @@ export class IndirizziComponent {
   genereteCategoryDetails(category: any): void {
     this.categoryDetails = category;
     this.showHero = false;
-    console.log(this.categoryDetails);
+    console.log("categori details: ", this.categoryDetails.Categories);
     this.showCategory = true;
 
 

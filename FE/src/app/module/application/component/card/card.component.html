@@ -1,1 +1,10 @@
-<p>card works!</p>
+<div class="card" style="width: 552px" (click)="openCard()">
+
+    <div class="img-container">
+        <img [src]="cover" class="" alt="...">
+    </div>
+
+    <div class="card-body">
+      <h5 class="card-title">{{data.name}}</h5>
+    </div>
+</div>

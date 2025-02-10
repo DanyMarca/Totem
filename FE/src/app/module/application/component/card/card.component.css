@@ -1,0 +1,21 @@
+.card{
+    border-radius: 25px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    
+}
+
+.img-container img{
+    width: 100%;
+    
+}
+
+.img-container{
+    height: 40vh;
+    overflow: hidden;
+    border-radius: 25px;
+}
+
+.card-body{
+    height: 20vh;
+}
+

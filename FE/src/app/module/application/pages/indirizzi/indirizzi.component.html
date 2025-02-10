@@ -15,8 +15,11 @@
 </section>
 
 <section id="category-details" *ngIf="showCategory">
-  <div id="category-container">
+  <div id="category-content">
+    <span><-</span>
     <!-- creare e istanziare in modo iterativo (categoryDetails.Categories) il componente card -->
+    <app-card *ngFor="let obj of categoryDetails.Categories; let j = index" [data]="categoryDetails.Categories[j]" ></app-card>
+
   </div>
 </section>
 

@@ -57,3 +57,19 @@ section#hero{
 .card-body{
   height: 20vh;
 }
+
+section#category-details{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  overflow: scroll;
+}
+
+#category-content{
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+}
