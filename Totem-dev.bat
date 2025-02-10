@@ -26,10 +26,6 @@ if %errorlevel% neq 0 (
     exit /b
 )
 
-<<<<<<< HEAD
-echo Apertura del browser su Google...
-start chrome --start-kiosk "http://localhost:4200/"
-=======
 REM Controlla se il server Angular è pronto
 echo Controllo del server Angular in corso...
 :check_angular
@@ -40,8 +36,8 @@ if errorlevel 1 (
     goto check_angular
 )
 
-REM Chiudi tutte le istanze di Chrome
-taskkill /f /im chrome.exe >nul 2>&1
+@REM REM Chiudi tutte le istanze di Chrome
+@REM taskkill /f /im chrome.exe >nul 2>&1
 
 REM Avvia Chrome in modalità kiosk
 echo Apertura del browser in modalità kiosk...
@@ -49,7 +45,6 @@ start chrome --kiosk "http://localhost:4200/"
 
 
 
->>>>>>> BE-general-fixess
 if %errorlevel% neq 0 (
     echo Errore nell'apertura del browser.
     exit /b
