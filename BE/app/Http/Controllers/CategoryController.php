@@ -10,54 +10,62 @@ use PhpParser\Builder\Class_;
 
 class CategoryController extends Controller
 {
-    public function findImage($obj){
+    public function findImage($obj, $orintetion = ""){
         $image = $obj->filestorageable()->select('path','orientation')->get();
+        if($orintetion != ""){
+            $image->where('orientation', $orintetion);
+            info($image);
+        }
         $obj->image = $image->isNotEmpty() ? $image : null;
     }
-    public function index(){
+    public function index()
+    {
         $categories = Category::all();
         $lyceum = [];
         $technician = [];
         $lyceumCarosello = [];
         $technicianCarosello = [];
-
+    
         foreach ($categories as $category) {
-            $this->findImage($category);
-
-            // Aggiungi la prima immagine al carosello specifico per tipo se disponibile
-            if ($category->image && $category->image->isNotEmpty()) {
-                if ($category->type == 'liceo') {
-                    $lyceumCarosello[] = $category->image->first()->path;
-                } elseif ($category->type == 'tecnico') {
-                    $technicianCarosello[] = $category->image->first()->path;
+            $this->findImage($category, "orizontal");
+    
+            // Filtra solo le immagini con orientamento "orizontal"
+            $horizontalImages = $category->image->where('orientation', 'orizontal');
+    
+            // Assegna solo le immagini orizzontali alla categoria
+            $category->image = $horizontalImages->values();
+    
+            if ($horizontalImages->isNotEmpty()) {
+                $firstImage = $horizontalImages->first();
+    
+                if ($category->type === 'liceo') {
+                    $lyceumCarosello[] = $firstImage->path;
+                    $lyceum[] = $category;
+                } elseif ($category->type === 'tecnico') {
+                    $technicianCarosello[] = $firstImage->path;
+                    $technician[] = $category;
                 }
             }
-
-            if ($category->type == 'liceo') {
-                $lyceum[] = $category;
-            } elseif ($category->type == 'tecnico') {
-                $technician[] = $category;
-            }
         }
+    
         return response()->json([
             'status' => 'success',
-            'cards'=> [
+            'cards' => [
                 [
-                "name" => "Liceo",
-                'carosello' => $lyceumCarosello,
-                "Categories" => $lyceum,
-
-            ],
-            [
-                "name" => "Tecnico",
-                'carosello' => $technicianCarosello,
-                "Categories" => $technician,
-
-            ],
+                    "name" => "Liceo",
+                    'carosello' => $lyceumCarosello,
+                    "Categories" => $lyceum,
+                ],
+                [
+                    "name" => "Tecnico",
+                    'carosello' => $technicianCarosello,
+                    "Categories" => $technician,
+                ],
             ]
-            
         ], 200);
     }
+    
+
 
     public function show($id){
         $category = Category::find($id);
