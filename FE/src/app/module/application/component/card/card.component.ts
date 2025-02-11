@@ -27,7 +27,7 @@ export class CardComponent {
   genereateCover(): string {
 
     for (let i = 0; i < this.data.image.length; i++) {
-      if (this.data.image[i].orientation==='orizontal'){
+      if (this.data.image[i].orientation==='horizontal'){
         return this.data.image[i].path;
       } 
 

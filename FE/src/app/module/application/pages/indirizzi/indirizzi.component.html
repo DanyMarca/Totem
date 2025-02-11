@@ -16,9 +16,9 @@
 
 <section id="category-details" *ngIf="showCategory">
   <div id="category-content">
-    <!-- creare e istanziare in modo iterativo (categoryDetails.Categories) il componente card -->
+    <!-- creare e istanziare in modo iterativo (categoryDetails.categories) il componente card -->
      
-    <app-card *ngFor="let obj of categoryDetails.Categories; let j = index" [data]="categoryDetails.Categories[j]" ></app-card>
+    <app-card *ngFor="let obj of categoryDetails.categories; let j = index" [data]="categoryDetails.categories[j]" ></app-card>
 
   </div>
 </section>
