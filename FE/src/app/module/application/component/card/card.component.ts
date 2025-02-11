@@ -8,6 +8,7 @@ import { Component, Input,OnInit } from '@angular/core';
 export class CardComponent {
   @Input() data!: any ;
   cover: string = '';
+  isOpened: boolean = false;
 
   constructor() {
     // console.log(this.data.name);
@@ -19,10 +20,7 @@ export class CardComponent {
   ngOnInit(): void {
     this.cover = this.genereateCover();
   }
-  openCard(): void {
-    console.log('Card opened');
-    console.log(this.data.image.length);
-  }
+  openCard(): void {this.isOpened = !this.isOpened;}
 
   genereateCover(): string {
 

@@ -59,7 +59,7 @@ class CategoryController extends Controller
             ]
         ], 200);
     }
-
+    
 
 
     public function show($id){
