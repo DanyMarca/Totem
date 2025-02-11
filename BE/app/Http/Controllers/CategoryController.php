@@ -10,13 +10,15 @@ use PhpParser\Builder\Class_;
 
 class CategoryController extends Controller
 {
-    public function findImage($obj, $orintetion = ""){
-        $image = $obj->filestorageable()->select('path','orientation')->get();
-        if($orintetion != ""){
-            $image->where('orientation', $orintetion);
-            info($image);
+    public function findImage($obj, $orientation = "")
+    {
+        $query = $obj->filestorageable()->select('path', 'orientation');
+
+        if (!empty($orientation)) {
+            $query->where('orientation', $orientation);
         }
-        $obj->image = $image->isNotEmpty() ? $image : null;
+
+        return $query->get();
     }
     public function index()
     {
@@ -25,22 +27,12 @@ class CategoryController extends Controller
         $technician = [];
         $lyceumCarosello = [];
         $technicianCarosello = [];
-    
         foreach ($categories as $category) {
-            $this->findImage($category, "orizontal");
-    
-            // Assicura che $category->image sia sempre una collection
-            $categoryImages = $category->image ?? collect();  
-    
-            // Filtra solo le immagini con orientamento "orizontal"
-            $horizontalImages = $categoryImages->where('orientation', 'orizontal');
-    
-            // Assegna solo le immagini orizzontali alla categoria
-            $category->image = $horizontalImages->values();
-    
-            if ($horizontalImages->isNotEmpty()) {
-                $firstImage = $horizontalImages->first();
-    
+            $category->image = $this->findImage($category, "horizontal");
+            info($category);
+            if ($category->image->isNotEmpty()) {
+                $firstImage = $category->image->first();
+                
                 if ($category->type === 'liceo') {
                     $lyceumCarosello[] = $firstImage->path;
                     $lyceum[] = $category;
@@ -50,24 +42,23 @@ class CategoryController extends Controller
                 }
             }
         }
-    
+
         return response()->json([
             'status' => 'success',
             'cards' => [
                 [
                     "name" => "Liceo",
                     'carosello' => $lyceumCarosello,
-                    "Categories" => $lyceum,
+                    "categories" => $lyceum,
                 ],
                 [
                     "name" => "Tecnico",
                     'carosello' => $technicianCarosello,
-                    "Categories" => $technician,
+                    "categories" => $technician,
                 ],
             ]
         ], 200);
     }
-    
     
 
 
