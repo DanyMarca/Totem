@@ -30,7 +30,9 @@ class CategoryController extends Controller
             $this->findImage($category, "orizontal");
     
             // Filtra solo le immagini con orientamento "orizontal"
-            $horizontalImages = $category->image->where('orientation', 'orizontal');
+            if (!$category->image->isEmpty()) {
+                $horizontalImages = $category->image->where('orientation', 'orizontal');
+            }
     
             // Assegna solo le immagini orizzontali alla categoria
             $category->image = $horizontalImages->values();

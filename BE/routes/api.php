@@ -48,6 +48,6 @@ Route::group([
 
 ], function ($router) {
 
-    Route::get('home', 'CategoryController@index');
-    Route::get('{id}', 'CategoryController@show');
+    Route::get('home', 'CategoryController@index')->withoutMiddleware('auth:api');
+    Route::get('{id}', 'CategoryController@show')->withoutMiddleware('auth:api');
 });
