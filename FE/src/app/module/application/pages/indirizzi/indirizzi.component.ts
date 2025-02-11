@@ -2,6 +2,8 @@ import { Component,OnInit  } from '@angular/core';
 import { catchError, of, tap } from 'rxjs';
 import { ContentServiceService } from 'src/app/shared/services/content-service.service';
 
+import { ActivatedRoute, Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-indirizzi',
@@ -17,14 +19,15 @@ export class IndirizziComponent {
   categoryDetails: any = [];
 
 
-  constructor(private contentService: ContentServiceService) { }
+  constructor(private contentService: ContentServiceService, private route: ActivatedRoute, private router: Router)
+   { }
 
   ngOnInit(): void {
     this.loadIndirizziData();
   }
 
   loadIndirizziData(): void {
-    this.isLoading = true; 
+    this.isLoading = true;
     
     this.contentService?.fetchDataHomeIndirizzi()?.pipe(
       tap(() => {
@@ -50,5 +53,7 @@ export class IndirizziComponent {
 
 
   }
-  
+
+
+
 }

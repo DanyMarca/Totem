@@ -14,7 +14,7 @@ export class ContentServiceService {
   ) {}
 
   fetchDataHomeIndirizzi() {
-    return this.http.get<any>(`${this.endpoint}home`);
+    return this.http.get<any>(`${this.endpoint}/Category/home`);
   }
 }
 
