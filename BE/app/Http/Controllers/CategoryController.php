@@ -29,10 +29,11 @@ class CategoryController extends Controller
         foreach ($categories as $category) {
             $this->findImage($category, "orizontal");
     
+            // Assicura che $category->image sia sempre una collection
+            $categoryImages = $category->image ?? collect();  
+    
             // Filtra solo le immagini con orientamento "orizontal"
-            if (!$category->image->isEmpty()) {
-                $horizontalImages = $category->image->where('orientation', 'orizontal');
-            }
+            $horizontalImages = $categoryImages->where('orientation', 'orizontal');
     
             // Assegna solo le immagini orizzontali alla categoria
             $category->image = $horizontalImages->values();
@@ -66,6 +67,7 @@ class CategoryController extends Controller
             ]
         ], 200);
     }
+    
     
 
 

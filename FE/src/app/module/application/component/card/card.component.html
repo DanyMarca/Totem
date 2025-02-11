@@ -1,4 +1,4 @@
-<div class="card" style="width: 552px" (click)="openCard()">
+<div class="card" style="width: 552px" (click)="openCard()" [ngClass]="{'card-open': isOpened}" [style.--customColor]="data.color" >
 
     <div class="img-container">
         <img [src]="cover" class="" alt="...">

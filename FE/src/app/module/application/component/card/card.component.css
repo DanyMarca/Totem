@@ -3,6 +3,9 @@
     box-shadow: 0 0 10px rgba(0,0,0,0.3);
     margin-left: 30px;
     margin-right: 30px;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
 .img-container img{
@@ -14,9 +17,21 @@
     height: 40vh;
     overflow: hidden;
     border-radius: 25px;
+
 }
 
 .card-body{
     height: 20vh;
 }
 
+.card-open{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw !important;
+    height: 100vh;
+    background-color: var(--customColor);
+    z-index: 1000;
+    margin: 0%;
+
+}
