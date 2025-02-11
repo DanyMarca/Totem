@@ -22,6 +22,7 @@ class CategoryController extends Controller
     }
     public function index()
     {
+        $serverIp = gethostbyname(gethostname());
         $categories = Category::all();
         $lyceum = [];
         $technician = [];
@@ -29,17 +30,23 @@ class CategoryController extends Controller
         $technicianCarosello = [];
         foreach ($categories as $category) {
             $category->image = $this->findImage($category, "horizontal");
-            info($category);
+
             if ($category->image->isNotEmpty()) {
                 $firstImage = $category->image->first();
-                
+                $imagePath = "http://" . $serverIp . $firstImage->path;
+
                 if ($category->type === 'liceo') {
-                    $lyceumCarosello[] = $firstImage->path;
+                    $lyceumCarosello[] = $imagePath;
                     $lyceum[] = $category;
+
                 } elseif ($category->type === 'tecnico') {
-                    $technicianCarosello[] = $firstImage->path;
+                    $technicianCarosello[] = $imagePath;
                     $technician[] = $category;
                 }
+            }
+            foreach ($category->image as $image) {
+                // Aggiungi l'IP al percorso dell'immagine per ogni categoria
+                $image->path = "http://" . $serverIp . $image->path;
             }
         }
 

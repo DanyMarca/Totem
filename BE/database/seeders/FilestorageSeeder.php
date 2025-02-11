@@ -44,7 +44,7 @@ class FileStorageSeeder extends Seeder
 
                 // Crea un nuovo record nella tabella FileStorage
                 FileStorage::create([
-                    'path' => config('app.url') . ':8000/storage/' . $storedFileName,
+                    'path' => ':8000/storage/' . $storedFileName,
                     'orientation' => $orientation,  // Memorizza solo "orizzontale" o "verticale"
                     'filestorageable_type' => Category::class, // Modifica se necessario
                     'filestorageable_id' => rand(1,10), // Modifica l'ID secondo le tue esigenze

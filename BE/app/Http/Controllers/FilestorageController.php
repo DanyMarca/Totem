@@ -28,7 +28,7 @@ class FilestorageController extends Controller
 
             // Creazione del record nella tabella FileStorage
             $file = Filestorage::create([
-                'path' => config('app.url') . ':8000/storage/' . $storedFileName,
+                'path' => ':8000/storage/' . $storedFileName,
                 'orientation' => implode('x', getimagesize($image)), // "larghezza x altezza"
                 'filestorageable_type' => Artifact::class,
                 'filestorageable_id' => 1,
