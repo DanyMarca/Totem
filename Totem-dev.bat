@@ -1,6 +1,7 @@
 @echo off
 REM Ottieni la directory dello script
 set scriptdir=%~dp0
+ipconfig | findstr /i "IPv4"
 
 echo Avvio del servizio MySQL...
 

@@ -17,12 +17,12 @@ class FilestorageFactory extends Factory
 
     public function definition()
     {
-        $obj = $this->faker->randomElement([Category::class,Artifact::class,Laboratory::class]);
-        return [
-            'path' => $this->faker->imageUrl(),
-            'orientation' => $this->faker->randomElement(['horizontal', 'vertical']),
-            'filestorageable_id' => $obj::inRandomOrder()->first()->id,
-            'filestorageable_type' => $obj
-        ];
+        // $obj = $this->faker->randomElement([Category::class,Artifact::class,Laboratory::class]);
+        // return [
+        //     'path' => $this->faker->imageUrl(),
+        //     'orientation' => $this->faker->randomElement(['horizontal', 'vertical']),
+        //     'filestorageable_id' => $obj::inRandomOrder()->first()->id,
+        //     'filestorageable_type' => $obj
+        // ];
     }
 }
