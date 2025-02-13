@@ -1,97 +1,153 @@
 <?php
 
+
+
 namespace App\Http\Controllers;
 
+
+
 use App\Models\Category;
-use App\Models\Laboratory;
+
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use PhpParser\Builder\Class_;
+
+
 
 class CategoryController extends Controller
+
 {
-    public function findImage($obj, $orientation = "")
+
+    private function getFullPath($path)
+
     {
-        $query = $obj->filestorageable()->select('path', 'orientation');
 
-        if (!empty($orientation)) {
-            $query->where('orientation', $orientation);
-        }
+        $serverIp = request()->getSchemeAndHttpHost(); // Ottiene "http://{ip_server}"
 
-        return $query->get();
+        return $serverIp . $path;
+
     }
+
+
+
+    private function findImage($obj)
+
+    {
+
+        $images = $obj->filestorageable()
+
+            ->select('path', 'orientation')
+
+            ->whereIn('orientation', ['horizontal', 'vertical'])
+
+            ->get()
+
+            ->keyBy('orientation');
+
+
+
+        return [
+
+            'horizontal' => $images->get('horizontal') ? (object) [
+
+                'path' => $this->getFullPath($images->get('horizontal')->path),
+
+                'orientation' => 'horizontal'
+
+            ] : null,
+
+            'vertical' => $images->get('vertical') ? (object) [
+
+                'path' => $this->getFullPath($images->get('vertical')->path),
+
+                'orientation' => 'vertical'
+
+            ] : null,
+
+        ];
+
+    }
+
+
+
     public function index()
-{
-    $serverIp = gethostbyname(gethostname());
-    $categories = Category::all();
-    $lyceum = [];
-    $technician = [];
-    $lyceumCarosello = [];
-    $technicianCarosello = [];
 
-    foreach ($categories as $category) {
-        // Prendi solo immagini orizzontali per i caroselli
-        $horizontalImages = $this->findImage($category, "horizontal");
+    {
 
-        if ($horizontalImages->isNotEmpty()) {
-            $firstImage = $horizontalImages->first();
-            $imagePath = "http://" . $serverIp . $firstImage->path;
+        $categories = Category::all();
 
-            if ($category->type === 'liceo') {
-                $lyceumCarosello[] = $imagePath;
-                $lyceum[] = $category;
-            } elseif ($category->type === 'tecnico') {
-                $technicianCarosello[] = $imagePath;
-                $technician[] = $category;
+        $data = [
+
+            'Liceo' => ['carosello' => [], 'categories' => []],
+
+            'Tecnico' => ['carosello' => [], 'categories' => []]
+
+        ];
+
+
+
+        foreach ($categories as $category) {
+
+            $images = $this->findImage($category);
+
+            $category->image = array_values(array_filter($images));
+
+
+
+            if ($images['horizontal']) {
+
+                $type = $category->type === 'liceo' ? 'Liceo' : 'Tecnico';
+
+                $data[$type]['carosello'][] = $images['horizontal']->path;
+
+                $data[$type]['categories'][] = $category;
+
             }
+
         }
 
-        // Recupera tutte le immagini della categoria, senza filtro di orientazione
-        $category->image = $this->findImage($category);
 
-        // Associa l'IP a ogni immagine della categoria
-        foreach ($category->image as $image) {
-            $image->path = "http://" . $serverIp . $image->path;
-        }
-    }
-
-    return response()->json([
-        'status' => 'success',
-        'cards' => [
-            [
-                "name" => "Liceo",
-                'carosello' => $lyceumCarosello,
-                "categories" => $lyceum,
-            ],
-            [
-                "name" => "Tecnico",
-                'carosello' => $technicianCarosello,
-                "categories" => $technician,
-            ],
-        ]
-    ], 200);
-}
-
-    
-
-
-    public function show($id){
-        $category = Category::find($id);
-        $this->findImage($category);
-        $category->laboratories->each(function($laboratory){
-            $this->findImage($laboratory);
-        });
 
         return response()->json([
+
             'status' => 'success',
-            'category' => $category->only('name', 'caption_intro', 'caption_specific', 'color', 'image'),
-            'subjects' => $category->subjects->map(function($subject){
-                return $subject->only('id', 'name', '1_year', '2_year', '3_year', '4_year', '5_year');
-            }),
-            'laboratories' => $category->laboratories->map(function($laboratory){
-                return $laboratory->only('id', 'name', 'image');
-            }),
+
+            'cards' => array_map(fn($name, $info) => ['name' => $name] + $info, array_keys($data), $data)
 
         ], 200);
+
     }
+
+
+
+    public function show($id)
+
+    {
+
+        $category = Category::findOrFail($id);
+
+        $category->image = $this->findImage($category);
+
+
+
+        $category->laboratories->each(function ($lab) {
+
+            $lab->image = $this->findImage($lab);
+
+        });
+
+
+
+        return response()->json([
+
+            'status' => 'success',
+
+            'category' => $category->only(['name', 'caption_intro', 'caption_specific', 'color', 'image']),
+
+            'subjects' => $category->subjects->map->only(['id', 'name', '1_year', '2_year', '3_year', '4_year', '5_year']),
+
+            'laboratories' => $category->laboratories->map->only(['id', 'name', 'image']),
+
+        ], 200);
+
+    }
+
 }

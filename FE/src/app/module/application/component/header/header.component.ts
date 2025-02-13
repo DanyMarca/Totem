@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
 
@@ -6,6 +6,9 @@ import { Router } from '@angular/router';
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
+})
+@Injectable({
+  providedIn: 'root'
 })
 export class HeaderComponent {
   selectedLanguage: string = 'it';
@@ -26,6 +29,7 @@ export class HeaderComponent {
       this.currentRoute = this.router.url;
       this.updateIndicator();
     });
+    console.log(this.showLogo)
   }
 
   updateSelectedOption(event: Event) {
@@ -45,6 +49,7 @@ export class HeaderComponent {
   }
 
   activateButton(icon: string, action:Function = () => {}) {
+    console.log("dentro activate button")
     this.showFunctionButton = true;
     this.showLogo = false;
 

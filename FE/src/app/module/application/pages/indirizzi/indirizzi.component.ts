@@ -20,7 +20,7 @@ export class IndirizziComponent {
 
 
   constructor(private contentService: ContentServiceService, private route: ActivatedRoute, private router: Router, private headerComponent: HeaderComponent)
-   { }
+  {}
 
   ngOnInit(): void {
     this.loadIndirizziData();
