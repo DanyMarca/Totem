@@ -1,6 +1,14 @@
 @echo off
 REM Ottieni la directory dello script
 set scriptdir=%~dp0
+@echo off
+ipconfig | findstr /i "IPv4"
+if %errorlevel% neq 0 (
+    echo Nessuna interfaccia IPv4 trovata, ---Connettersi a Internet---.
+) else (
+    echo Comando eseguito correttamente.
+)
+
 
 echo Avvio del servizio MySQL...
 

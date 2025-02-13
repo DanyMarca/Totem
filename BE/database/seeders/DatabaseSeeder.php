@@ -35,7 +35,7 @@ class DatabaseSeeder extends Seeder
         LaboratoryCategory::factory(10)->create();
         echo("8° Filestorage\n");
         $this->call(FilestorageSeeder::class);
-        FileStorage::factory(10)->create();
+        // FileStorage::factory(10)->create();
         echo("9° Subject\n");
         Subject::factory(30)->create();
 

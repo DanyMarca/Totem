@@ -19,7 +19,8 @@ class LaboratoryCategoryFactory extends Factory
     public function definition(): array
     {
         return [
-            'category_id' => Category::inRandomOrder()->first()->id,
+            // 'category_id' => Category::inRandomOrder()->first()->id,
+            'category_id' => rand(1,10),
             'laboratory_id' => Laboratory::inRandomOrder()->first()->id,
         ];
     }

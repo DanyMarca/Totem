@@ -24,6 +24,6 @@ class Laboratory extends Model
 
     public function filestorageable()
     {
-        return $this->morphMany(Filestorage::class, 'filestorageable');
+        return $this->morphMany(FileStorage::class, 'filestorageable');
     }
 }
