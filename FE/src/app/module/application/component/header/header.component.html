@@ -19,7 +19,10 @@
 </header> -->
 <header>
     <div id="header-content">
-        <div>
+        <div id="function-button" *ngIf="showFunctionButton">
+            <img [src]="icon" alt="">
+        </div>
+        <div *ngIf="showLogo">
             <span class="logo"></span>
         </div>
         <div id="header__menu">

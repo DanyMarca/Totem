@@ -21,51 +21,57 @@ class CategoryController extends Controller
         return $query->get();
     }
     public function index()
-    {
-        $serverIp = gethostbyname(gethostname());
-        $categories = Category::all();
-        $lyceum = [];
-        $technician = [];
-        $lyceumCarosello = [];
-        $technicianCarosello = [];
-        foreach ($categories as $category) {
-            $category->image = $this->findImage($category, "horizontal");
+{
+    $serverIp = gethostbyname(gethostname());
+    $categories = Category::all();
+    $lyceum = [];
+    $technician = [];
+    $lyceumCarosello = [];
+    $technicianCarosello = [];
 
-            if ($category->image->isNotEmpty()) {
-                $firstImage = $category->image->first();
-                $imagePath = "http://" . $serverIp . $firstImage->path;
+    foreach ($categories as $category) {
+        // Prendi solo immagini orizzontali per i caroselli
+        $horizontalImages = $this->findImage($category, "horizontal");
 
-                if ($category->type === 'liceo') {
-                    $lyceumCarosello[] = $imagePath;
-                    $lyceum[] = $category;
+        if ($horizontalImages->isNotEmpty()) {
+            $firstImage = $horizontalImages->first();
+            $imagePath = "http://" . $serverIp . $firstImage->path;
 
-                } elseif ($category->type === 'tecnico') {
-                    $technicianCarosello[] = $imagePath;
-                    $technician[] = $category;
-                }
-            }
-            foreach ($category->image as $image) {
-                // Aggiungi l'IP al percorso dell'immagine per ogni categoria
-                $image->path = "http://" . $serverIp . $image->path;
+            if ($category->type === 'liceo') {
+                $lyceumCarosello[] = $imagePath;
+                $lyceum[] = $category;
+            } elseif ($category->type === 'tecnico') {
+                $technicianCarosello[] = $imagePath;
+                $technician[] = $category;
             }
         }
 
-        return response()->json([
-            'status' => 'success',
-            'cards' => [
-                [
-                    "name" => "Liceo",
-                    'carosello' => $lyceumCarosello,
-                    "categories" => $lyceum,
-                ],
-                [
-                    "name" => "Tecnico",
-                    'carosello' => $technicianCarosello,
-                    "categories" => $technician,
-                ],
-            ]
-        ], 200);
+        // Recupera tutte le immagini della categoria, senza filtro di orientazione
+        $category->image = $this->findImage($category);
+
+        // Associa l'IP a ogni immagine della categoria
+        foreach ($category->image as $image) {
+            $image->path = "http://" . $serverIp . $image->path;
+        }
     }
+
+    return response()->json([
+        'status' => 'success',
+        'cards' => [
+            [
+                "name" => "Liceo",
+                'carosello' => $lyceumCarosello,
+                "categories" => $lyceum,
+            ],
+            [
+                "name" => "Tecnico",
+                'carosello' => $technicianCarosello,
+                "categories" => $technician,
+            ],
+        ]
+    ], 200);
+}
+
     
 
 

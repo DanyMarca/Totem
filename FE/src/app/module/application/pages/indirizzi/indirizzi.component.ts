@@ -4,7 +4,7 @@ import { ContentServiceService } from 'src/app/shared/services/content-service.s
 
 import { ActivatedRoute, Router } from '@angular/router';
 
-
+import { HeaderComponent } from '../../component/header/header.component';
 @Component({
   selector: 'app-indirizzi',
   templateUrl: './indirizzi.component.html',
@@ -19,11 +19,16 @@ export class IndirizziComponent {
   categoryDetails: any = [];
 
 
-  constructor(private contentService: ContentServiceService, private route: ActivatedRoute, private router: Router)
+  constructor(private contentService: ContentServiceService, private route: ActivatedRoute, private router: Router, private headerComponent: HeaderComponent)
    { }
 
   ngOnInit(): void {
     this.loadIndirizziData();
+  }
+
+  goBack(): void {
+    this.showCategory=false;
+    this.showHero=true;
   }
 
   loadIndirizziData(): void {
@@ -50,10 +55,6 @@ export class IndirizziComponent {
     this.showHero = false;
     console.log("categori details: ", this.categoryDetails.categories);
     this.showCategory = true;
-
-
+    this.headerComponent.activateButton('FE\src\assets\icon\arrow_back_icon_235226.png', this.goBack);
   }
-
-
-
 }

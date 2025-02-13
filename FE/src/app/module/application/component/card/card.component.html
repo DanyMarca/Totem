@@ -1,10 +1,22 @@
 <div class="card" style="width: 552px" (click)="openCard()" [ngClass]="{'card-open': isOpened}" [style.--customColor]="data.color" >
 
-    <div class="img-container">
-        <img [src]="cover" class="" alt="...">
+    <div class="img-container" *ngIf="!isOpened">
+        <img [src]="coverHorizontal" class="" alt="...">
     </div>
 
     <div class="card-body">
       <h5 class="card-title">{{data.name}}</h5>
     </div>
+    <section id="card-open" *ngIf="isOpened">
+      <div id="card-content" class="container">
+        <div class="row">
+          <div class="vertical-img col">
+            <img [src]="coverVertical" class="" alt="...">
+           </div>
+          <div class="col">
+
+          </div>
+        </div>
+      </div>
+    </section>
 </div>
