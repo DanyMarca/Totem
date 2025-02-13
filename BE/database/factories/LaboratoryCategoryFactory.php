@@ -20,7 +20,7 @@ class LaboratoryCategoryFactory extends Factory
     {
         return [
             // 'category_id' => Category::inRandomOrder()->first()->id,
-            'category_id' => rand(1,4),
+            'category_id' => rand(1,10),
             'laboratory_id' => Laboratory::inRandomOrder()->first()->id,
         ];
     }
