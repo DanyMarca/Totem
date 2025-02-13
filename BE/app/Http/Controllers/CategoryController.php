@@ -43,13 +43,25 @@ class CategoryController extends Controller
 
         foreach ($categories as $category) {
             $images = $this->findImage($category);
-            $category->image = array_values(array_filter($images));
 
+            // Mantiene solo un'immagine orizzontale e una verticale
+            $filteredImages = array_filter([
+                'horizontal' => $images['horizontal'],
+                'vertical' => $images['vertical']
+            ]);
+
+            // Assegna solo le immagini disponibili
+            $category->image = array_values($filteredImages);
+
+            $type = $category->type === 'liceo' ? 'Liceo' : 'Tecnico';
+
+            // Aggiunge al carosello solo se c'è un'immagine orizzontale
             if ($images['horizontal']) {
-                $type = $category->type === 'liceo' ? 'Liceo' : 'Tecnico';
                 $data[$type]['carosello'][] = $images['horizontal']->path;
-                $data[$type]['categories'][] = $category;
             }
+
+            // Aggiunge sempre la categoria
+            $data[$type]['categories'][] = $category;
         }
 
         return response()->json([
@@ -61,10 +73,10 @@ class CategoryController extends Controller
     public function show($id)
     {
         $category = Category::findOrFail($id);
-        $category->image = $this->findImage($category);
+        $category->image = array_values(array_filter($this->findImage($category)));
 
         $category->laboratories->each(function ($lab) {
-            $lab->image = $this->findImage($lab);
+            $lab->image = array_values(array_filter($this->findImage($lab)));
         });
 
         return response()->json([
