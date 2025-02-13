@@ -39,6 +39,7 @@ class FileStorageSeeder extends Seeder
 
                 // Determina l'orientamento: orizzontale o verticale
                 $orientation = ($width > $height) ? 'horizontal' : 'vertical';
+                
 
                 // Verifica se il file esiste già nel database
 

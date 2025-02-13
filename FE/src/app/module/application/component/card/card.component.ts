@@ -7,27 +7,35 @@ import { Component, Input,OnInit } from '@angular/core';
 })
 export class CardComponent {
   @Input() data!: any ;
-  cover: string = '';
+  coverHorizontal: string = '';
+  coverVertical: string = '';
   isOpened: boolean = false;
 
   constructor() {
     // console.log(this.data.name);
     
-    // this.cover = this.genereateCover();
+
   }
 
 
   ngOnInit(): void {
-    this.cover = this.genereateCover();
+    this.coverHorizontal = this.genereateCover("horizontal");
+    this.coverVertical = this.genereateCover("vertical");
+    console.log(this.coverHorizontal)
+    console.log(this.coverVertical)
+    console.log("fine oninit")
   }
-  openCard(): void {this.isOpened = !this.isOpened;}
 
-  genereateCover(): string {
+  openCard(): void {this.isOpened = true;}
+  closeCard(): void {this.isOpened = false;}
 
+  genereateCover(orientamento:string): string {
     for (let i = 0; i < this.data.image.length; i++) {
-      if (this.data.image[i].orientation==='horizontal'){
+      if (this.data.image[i].orientation==='horizontal' && orientamento==='horizontal') {
         return this.data.image[i].path;
-      } 
+      } else if (this.data.image[i].orientation==='vertical' && orientamento==='vertical') {
+        return this.data.image[i].path;
+      }
 
     }
     return ''; // Default return statement
