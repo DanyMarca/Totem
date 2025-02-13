@@ -80,20 +80,44 @@ class CategoryController extends Controller
     }
 
     public function show($id)
-    {
-        $category = Category::findOrFail($id);
-        $images = $this->findImage($category, "vertical");
-        $category->image = array_values(array_filter($images));
+{
+    $category = Category::findOrFail($id);
+    
+    // Trova la prima immagine verticale (opzionale, se serve per la categoria)
+    $images = $this->findImage($category, "vertical");
+    $category->image = !empty($images) ? array_values(array_filter($images)) : [];
+
+    // Riorganizza i laboratori con la struttura richiesta
+    $category->laboratories = $category->laboratories->map(function ($laboratory) {
+        // Trova la prima immagine orizzontale
+        $images = $this->findImage($laboratory);
         
-        $category->laboratories->each(function ($lab) {
-            $lab->image = $this->findImage($lab);
+        // Filtra le immagini per ottenere solo quelle orizzontali
+        $horizontalImage = collect($images)->first(function ($image) {
+            return $image && $image->orientation === 'horizontal'; // Trova la prima immagine orizzontale
         });
 
-        return response()->json([
-            'status' => 'success',
-            'category' => $category->only(['name', 'caption_intro', 'caption_specific', 'color', 'image']),
-            'subjects' => $category->subjects->map->only(['id', 'name', '1_year', '2_year', '3_year', '4_year', '5_year']),
-            'laboratories' => $category->laboratories->map->only(['id', 'name', 'image']),
-        ], 200);
-    }
+        // Se trovata un'immagine orizzontale, prendi path e orientation
+        $imageData = $horizontalImage ? [
+            'path' => $horizontalImage->path,
+            'orientation' => $horizontalImage->orientation
+        ] : null;
+
+        return [
+            'id' => $laboratory->id,
+            'name' => $laboratory->name,
+            'description' => $laboratory->description,
+            'image' => $imageData, // Assegna la prima immagine orizzontale, se presente
+        ];
+    });
+
+    return response()->json([
+        'status' => 'success',
+        'category' => $category->only(['name', 'caption_intro', 'caption_specific', 'color', 'image']),
+        'subjects' => $category->subjects->map->only(['id', 'name', '1_year', '2_year', '3_year', '4_year', '5_year']),
+        'laboratories' => $category->laboratories // Restituisci i laboratori con la prima immagine orizzontale
+        
+    ], 200);
+}
+
 }

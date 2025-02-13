@@ -19,7 +19,7 @@ class Category extends Model
 
     public function laboratories()
     {
-        return $this->belongsToMany(Laboratory::class, 'Laboratories_Categories', 'category_id', 'laboratory_id');
+        return $this->belongsToMany(Laboratory::class, 'laboratories_categories', 'category_id', 'laboratory_id');
     }
 
     public function filestorageable()

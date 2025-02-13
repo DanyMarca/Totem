@@ -20,6 +20,7 @@ return new class extends Migration
             $table->unsignedBigInteger('category_id');
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('CASCADE');;
             $table->timestamps();
+            $table->unique(['category_id','laboratory_id']);
         });
 
         Schema::enableForeignKeyConstraints();
