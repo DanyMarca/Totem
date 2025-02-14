@@ -51,3 +51,14 @@ Route::group([
     Route::get('home', 'CategoryController@index')->withoutMiddleware('auth:api');
     Route::get('{id}', 'CategoryController@show')->withoutMiddleware('auth:api');
 });
+
+//Artifact routes -------------------------------------------------------
+Route::group([
+    'namespace' => 'App\Http\Controllers',
+    'prefix' => 'Artifact'
+
+], function ($router) {
+
+    Route::get('home', 'ArtifactController@index')->withoutMiddleware('auth:api');
+    Route::get('{id}', 'ArtifactController@show')->withoutMiddleware('auth:api');
+});

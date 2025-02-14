@@ -45,13 +45,15 @@ class FileStorageSeeder extends Seeder
                 // Verifica se il file esiste già nel database
 
                 // Crea un nuovo record nella tabella FileStorage
-                $type = [Category::class,Laboratory::class];
-                FileStorage::create([
+                $type = [Category::class,Laboratory::class,Artifact::class];
+
+                for($i=0; $i<3; $i++)
+                { FileStorage::create([
                     'path' => '/storage/' . $storedFileName,
                     'orientation' => $orientation,  // Memorizza solo "orizzontale" o "verticale"
-                    'filestorageable_type' => $type[rand(0,1)], // Modifica se necessario
+                    'filestorageable_type' => $type[rand(0,2)], // Modifica se necessario
                     'filestorageable_id' => rand(1,5), // Modifica l'ID secondo le tue esigenze
-                ]);
+                ]);}
 
                 echo "File {$storedFileName} caricato correttamente con orientamento {$orientation}.\n";
 

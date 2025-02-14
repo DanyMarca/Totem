@@ -18,6 +18,13 @@ class Filestorage extends Model
         'filestorageable_type',
     ];
 
+    protected $appends = ['image_url'];
+
+    public function getImageUrlAttribute()
+    {
+        return $this->path ? asset('storage/' . $this->path) : null;
+    }
+
     public function filestorageable()
     {
         return $this->morphTo();
