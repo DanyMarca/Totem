@@ -20,7 +20,7 @@ class ArtifactController extends Controller
                 'id' => $artifact->id,
                 'name' => $artifact->name,
                 'description' => $artifact->description,
-                'image' => $artifact->filestorageable->first(),
+                'image' => $artifact->filestorageable->first() ? $artifact->filestorageable->first()->image_url : null,
                 'period' => $artifact->period,
                 'material' => $artifact->material,
                 'location' => $artifact->location,
