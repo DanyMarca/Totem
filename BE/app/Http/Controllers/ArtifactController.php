@@ -39,4 +39,37 @@ class ArtifactController extends Controller
         }
     }
 
+    public function show($id) {
+        try {
+            $artifact = Artifact::with('categories', 'filestorageable')->find($id);
+    
+            if (!$artifact) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Artifact not found'
+                ], 404);
+            }
+    
+            // Associare ogni path con la sua orientation
+            $artifact['image'] = $artifact->filestorageable->map(function ($file) {
+                return [
+                    'path' => $file->image_url,
+                    'orientation' => $file->orientation
+                ];
+            });
+    
+            return response()->json([
+                'status' => 'success',
+                'data' => collect($artifact)->only(['id', 'name', 'description', 'period', 'material', 'location', 'type', 'priority', 'image']),
+            ]);
+    
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'Errore',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
+    
+
 }
