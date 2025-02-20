@@ -6,13 +6,18 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use App\Models\{FileStorage, Laboratory, Category, Artifact, User, ArtifactCategory, LaboratoryCategory, Log, Subject};
+use Illuminate\Support\Facades\Storage;
 use Database\Seeders\FilestorageSeeder as SeedersFilestorageSeeder;
+use App\Models\{FileStorage, Laboratory, Category, Artifact, User, ArtifactCategory, LaboratoryCategory, Log, Subject};
 
 class DatabaseSeeder extends Seeder
 {
     public function run()
     {
+        Storage::deleteDirectory('public');
+        echo "Filestorage table deleted\n";
+        Storage::makeDirectory('public');
+        
         DB::table('users')->insert([
             'username' => 'Admin',
             'email' => 'admin'.'@example.com',

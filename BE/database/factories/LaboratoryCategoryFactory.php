@@ -11,17 +11,22 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class LaboratoryCategoryFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
     public function definition(): array
-    {
-        return [
-            // 'category_id' => Category::inRandomOrder()->first()->id,
-            'category_id' => rand(1,10),
-            'laboratory_id' => Laboratory::inRandomOrder()->first()->id,
-        ];
-    }
+{
+    static $usedCombinations = [];
+
+    do {
+        $category_id = Category::inRandomOrder()->first()->id;
+        $laboratory_id = Laboratory::inRandomOrder()->first()->id;
+        $key = $category_id . '-' . $laboratory_id;
+    } while (isset($usedCombinations[$key]));
+
+    $usedCombinations[$key] = true;
+
+    return [
+        'category_id' => $category_id,
+        'laboratory_id' => $laboratory_id,
+    ];
+}
+
 }
