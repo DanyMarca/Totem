@@ -59,6 +59,17 @@ Route::group([
 
 ], function ($router) {
 
-    Route::get('home', 'ArtifactController@index')->withoutMiddleware('auth:api');
-    Route::get('{id}', 'ArtifactController@show')->withoutMiddleware('auth:api');
+    Route::get('home/{n_image?}', 'ArtifactController@index')->withoutMiddleware('auth:api');
+    Route::get('{id}/{n_image?}', 'ArtifactController@show')->withoutMiddleware('auth:api');
+});
+
+//Laboratory routes -------------------------------------------------------
+Route::group([
+    'namespace' => 'App\Http\Controllers',
+    'prefix' => 'Laboratory'
+
+], function ($router) {
+
+    Route::get('home', 'LaboratoryController@index')->withoutMiddleware('auth:api');
+    Route::get('{id}/{n_image?}', 'LaboratoryController@show')->withoutMiddleware('auth:api');
 });
