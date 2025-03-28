@@ -5,6 +5,9 @@ import { ContentServiceService } from 'src/app/shared/services/content-service.s
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { HeaderComponent } from '../../component/header/header.component';
+
+import { HeaderService } from '../../component/service-dedicati/header.service';
+
 @Component({
   selector: 'app-indirizzi',
   templateUrl: './indirizzi.component.html',
@@ -19,7 +22,13 @@ export class IndirizziComponent {
   categoryDetails: any = [];
 
 
-  constructor(private contentService: ContentServiceService, private route: ActivatedRoute, private router: Router, private headerComponent: HeaderComponent)
+  constructor(
+    private contentService: ContentServiceService, 
+    private route: ActivatedRoute, 
+    private router: Router,
+    private headerComponent: HeaderComponent,
+    private headerService: HeaderService
+  )
   {}
 
   ngOnInit(): void {
@@ -27,8 +36,9 @@ export class IndirizziComponent {
   }
 
   goBack(): void {
-    this.showCategory=false;
-    this.showHero=true;
+    this.showCategory = false;
+    this.showHero = true;
+    this.headerService.disableButton(); // Nasconde il bottone e mostra il logo
   }
 
   loadIndirizziData(): void {
@@ -45,16 +55,16 @@ export class IndirizziComponent {
         return of([]);
       })
     ).subscribe((res) => {
-      this.homedata=res
-      
+      this.homedata=res;
     });
   }
+
 
   genereteCategoryDetails(category: any): void {
     this.categoryDetails = category;
     this.showHero = false;
-    console.log("categori details: ", this.categoryDetails.categories);
     this.showCategory = true;
-    this.headerComponent.activateButton('FE\src\assets\icon\arrow_back_icon_235226.png', this.goBack);
+    
+    this.headerService.activateButton('../../../../../assets/icon/arrow_back_icon_235226.png', this.goBack.bind(this));
   }
 }

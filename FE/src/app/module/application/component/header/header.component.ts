@@ -1,19 +1,24 @@
-import { Component, Injectable } from '@angular/core';
+import { Component, Injectable, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
+
+import { HeaderService } from '../service-dedicati/header.service';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css']
+  styleUrls: ['./header.component.css'],
+  
 })
 @Injectable({
   providedIn: 'root'
 })
 export class HeaderComponent {
+
   selectedLanguage: string = 'it';
   currentRoute: string = '';
   indicatorTransform: string = 'translateX(0px)';
+  menuiIsLoading: boolean = false;
 
   showFunctionButton:boolean = false;
   showLogo:boolean = true;
@@ -22,14 +27,23 @@ export class HeaderComponent {
 
   constructor(
     private translate: TranslateService,
-    private router: Router
+    private router: Router,
+    private headerService: HeaderService
   ) {
     // Aggiorna la route corrente e l'indicatore all'avvio o cambio di route
+
+
+    this.headerService.showFunctionButton$.subscribe(value => this.showFunctionButton = value);
+    this.headerService.showLogo$.subscribe(value => this.showLogo = value);
+    this.headerService.icon$.subscribe(value => this.icon = value);
+    this.headerService.buttonAction$.subscribe(value => this.buttonAction = value);
+  }
+
+  ngOnInit() {
     this.router.events.subscribe(() => {
       this.currentRoute = this.router.url;
-      this.updateIndicator();
+      this.disableButton();
     });
-    console.log(this.showLogo)
   }
 
   updateSelectedOption(event: Event) {
@@ -41,7 +55,13 @@ export class HeaderComponent {
   changeLanguage(lang: string) {
     this.selectedLanguage = lang;
     this.translate.use(lang);
+    // metodo per aggiornare l'estetica del select-box del menu
+    setTimeout(() => {
+      this.updateIndicator();
+    }, 5);
   }
+
+
 
   setActive(route: string) {
     this.currentRoute = route;
@@ -49,13 +69,11 @@ export class HeaderComponent {
   }
 
   activateButton(icon: string, action:Function = () => {}) {
-    console.log("dentro activate button")
     this.showFunctionButton = true;
     this.showLogo = false;
 
     this.icon = icon;
     this.buttonAction = action;
-    
   }
 
   disableButton() {
@@ -65,6 +83,7 @@ export class HeaderComponent {
 
 
   updateIndicator() {
+    console.log("updateIndicator");
     const routes = ['/indirizzi', '/ambiente', '/museum', '/recognitions'];
     const index = routes.indexOf(this.currentRoute);
 

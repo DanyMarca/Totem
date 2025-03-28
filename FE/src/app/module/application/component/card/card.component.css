@@ -5,7 +5,8 @@
     margin-right: 30px;
     position: relative;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.5s ease-in;
+
 }
 
 .img-container img{
@@ -33,5 +34,87 @@
     background-color: var(--customColor);
     z-index: 1000;
     margin: 0%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
+    border-radius: 0px;
+
+    cursor: default;
+}
+
+#card-content{
+    background-color: var(--color-bg);
+    width: 95%;
+    height: 95%;
+    margin: 0%;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    border-radius: 47px;
+}
+
+#card-content img{
+    border-radius: 25px;
+    object-fit: cover;
+}
+
+#card-content .grid{
+    width: 100%;
+    height: 95%;
+}
+
+#card-content .col-60{
+    display: grid;
+    flex-direction: column;
+
+}
+
+.col-60 h2{
+    margin-top: 2vh;
+}
+.col-60 h1{
+    margin-bottom: 4vh;
+}
+
+
+.vertical-img{
+    width: 100%;
+    height: 90vh !important;
+}
+
+.orizontal-img{
+    width: 100%;
+    height: 50vh;
+    align-self: flex-end;
+}
+
+#close-button{
+    position: absolute;
+
+    width: 70px;
+    height: 70px;
+    border-radius: 100%;
+    background-color: red;
+    color: var(--secondary-text-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+
+    z-index: 9999;
+    top: 10px;
+    left: 25px;
+}
+
+#close-button img{
+    width: 32px;
+    height: 32px;
+    
+}
+
+#close-button:hover{
+    background-color: #00ff00;
 }

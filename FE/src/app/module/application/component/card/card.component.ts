@@ -12,7 +12,7 @@ export class CardComponent {
   isOpened: boolean = false;
 
   constructor() {
-    // console.log(this.data.name);
+
     
 
   }
@@ -21,13 +21,12 @@ export class CardComponent {
   ngOnInit(): void {
     this.coverHorizontal = this.genereateCover("horizontal");
     this.coverVertical = this.genereateCover("vertical");
-    console.log(this.coverHorizontal)
-    console.log(this.coverVertical)
-    console.log("fine oninit")
   }
 
-  openCard(): void {this.isOpened = true;}
-  closeCard(): void {this.isOpened = false;}
+  switchCard(): void {
+    this.isOpened = !this.isOpened;
+    console.log(this.isOpened);
+  }
 
   genereateCover(orientamento:string): string {
     for (let i = 0; i < this.data.image.length; i++) {

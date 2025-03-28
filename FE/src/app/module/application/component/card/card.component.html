@@ -1,22 +1,28 @@
-<div class="card" style="width: 552px" (click)="openCard()" [ngClass]="{'card-open': isOpened}" [style.--customColor]="data.color" >
-
+<div class="card" style="width: 552px" (click)="switchCard()" [ngClass]="{'card-open': isOpened}" [style.--customColor]="data.color" >
     <div class="img-container" *ngIf="!isOpened">
         <img [src]="coverHorizontal" class="" alt="...">
     </div>
 
-    <div class="card-body">
+    <div class="card-body" *ngIf="!isOpened">
       <h5 class="card-title">{{data.name}}</h5>
     </div>
-    <section id="card-open" *ngIf="isOpened">
-      <div id="card-content" class="container">
-        <div class="row">
-          <div class="vertical-img col">
-            <img [src]="coverVertical" class="" alt="...">
-           </div>
-          <div class="col">
-
+    
+    <div id="card-content" *ngIf="isOpened">
+      <div class="grid">
+        <div class="col-40">
+          <span id="close-button" style="width: 70px; height: 70px;"  (click)="switchCard()">
+            <img src="../../../../../assets/icon/arrow_back_icon_235226.png" alt="">
+          </span>
+          <img [src]="coverVertical" class="vertical-img" alt="..." style="border-radius: 45px;">
+        </div>
+        <div class="col-60">
+          <div>
+            <h2>{{data.type}}</h2>
+            <h1>{{data.name}}</h1>
+            <p>{{data.caption_intro}} Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis, porro natus! Voluptas autem ut vitae, voluptates, impedit dicta possimus rerum dignissimos iste veniam, veritatis maiores officiis praesentium culpa minima reprehenderit?</p>
           </div>
+          <img [src]="coverHorizontal" alt="" class="orizontal-img">
         </div>
       </div>
-    </section>
+    </div>
 </div>
