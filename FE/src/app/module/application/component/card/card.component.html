@@ -1,4 +1,4 @@
-<div class="card" style="width: 552px" (click)="switchCard()" [ngClass]="{'card-open': isOpened}" [style.--customColor]="data.color" >
+<div class="card" style="width: 552px" (click)="switchCard($event)" [ngClass]="{'card-open': isOpened}" [style.--customColor]="data.color" >
     <div class="img-container" *ngIf="!isOpened">
         <img [src]="coverHorizontal" class="" alt="...">
     </div>
@@ -10,7 +10,7 @@
     <div id="card-content" *ngIf="isOpened">
       <div class="grid">
         <div class="col-40">
-          <span id="close-button" style="width: 70px; height: 70px;"  (click)="switchCard()">
+          <span id="close-button" style="width: 70px; height: 70px;"  (click)="switchCard($event)">
             <img src="../../../../../assets/icon/arrow_back_icon_235226.png" alt="">
           </span>
           <img [src]="coverVertical" class="vertical-img" alt="..." style="border-radius: 45px;">

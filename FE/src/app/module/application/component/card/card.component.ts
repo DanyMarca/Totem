@@ -23,7 +23,8 @@ export class CardComponent {
     this.coverVertical = this.genereateCover("vertical");
   }
 
-  switchCard(): void {
+  switchCard(event: Event): void {
+    event.stopPropagation(); // Ferma la propagazione dell'evento
     this.isOpened = !this.isOpened;
     console.log(this.isOpened);
   }
