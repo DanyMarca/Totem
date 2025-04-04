@@ -1,40 +1,22 @@
-<!-- <header>
-    <div id="header-content">
-        <div>
-            <span class="logo"></span>
-        </div>
-        <div id="header__menu">
-            <ul>
-                <li [ngClass]="{'current-page': currentRoute === '/indirizzi'}"><a routerLink="/indirizzi">{{ 'header.ADDRESSES' | translate }}</a></li>
-                <li [ngClass]="{'current-page': currentRoute === '/ambiente'}"><a routerLink="/environment">{{ 'header.ENVIROMENT' | translate }}</a></li>
-                <li [ngClass]="{'current-page': currentRoute === '/museum'}"><a routerLink="/museum">{{ 'header.MUSEUM' | translate }}</a></li>
-                <li [ngClass]="{'current-page': currentRoute === '/recognitions'}"><a routerLink="/recognitions">{{ 'header.RECOGNITIONS' | translate }}</a></li>
-            </ul>
-        </div>
-        <select [ngModel]="selectedLanguage" (change)="updateSelectedOption($event)" class="form-select">
-            <option value="it" selected>Italiano</option>
-            <option value="en">English</option>
-        </select>
-    </div>
-</header> -->
 <header>
     <div id="header-content">
-        <div id="function-button" *ngIf="showFunctionButton">
-            <img [src]="icon" alt="">
+        <div id="function-button" *ngIf="showFunctionButton" style="width: 70px; height: 70px;"  (click)="buttonAction()">
+            <img [src]="icon" alt="Button Icon">
         </div>
         <div *ngIf="showLogo">
             <span class="logo"></span>
         </div>
-        <div id="header__menu">
-            <!-- Contenitore per i menu -->
+        <div id="header__menu" *ngIf="!menuiIsLoading">
             <ul>
-                <li><div class="current-page-box" [style.transform]="indicatorTransform"></div><a routerLink="/indirizzi" (click)="setActive('/indirizzi')">{{ 'header.ADDRESSES' | translate }}</a></li>
+                <li>
+                    <div class="current-page-box" [style.transform]="indicatorTransform"></div>
+                    <a routerLink="/indirizzi" (click)="setActive('/indirizzi')">{{ 'header.ADDRESSES' | translate }}</a>
+                </li>
                 <li><a routerLink="/ambiente" (click)="setActive('/ambiente')">{{ 'header.ENVIROMENT' | translate }}</a></li>
                 <li><a routerLink="/museum" (click)="setActive('/museum')">{{ 'header.MUSEUM' | translate }}</a></li>
                 <li><a routerLink="/recognitions" (click)="setActive('/recognitions')">{{ 'header.RECOGNITIONS' | translate }}</a></li>
+                <li><a routerLink="/event" (click)="setActive('/event')">{{ 'header.EVENT' | translate }}</a></li>
             </ul>
-            <!-- Quadrato evidenziato -->
-            
         </div>
         <select [ngModel]="selectedLanguage" (change)="updateSelectedOption($event)" class="form-select">
             <option value="it" selected>Italiano</option>
